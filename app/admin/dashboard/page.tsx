@@ -16,13 +16,24 @@ interface Project {
   order: number;
 }
 
+interface Contact {
+  _id: string;
+  name: string;
+  email: string;
+  message: string;
+  createdAt: string;
+  read: boolean;
+}
+
 export default function AdminDashboard() {
   const [projects, setProjects] = useState<Project[]>([]);
+  const [contacts, setContacts] = useState<Contact[]>([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
     fetchProjects();
+    fetchContacts();
   }, []);
 
   const fetchProjects = async () => {
@@ -36,6 +47,18 @@ export default function AdminDashboard() {
       console.error('Error fetching projects:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchContacts = async () => {
+    try {
+      const response = await fetch('/api/contact');
+      if (response.ok) {
+        const data = await response.json();
+        setContacts(data);
+      }
+    } catch (error) {
+      console.error('Error fetching contacts:', error);
     }
   };
 
@@ -161,6 +184,51 @@ export default function AdminDashboard() {
             </ul>
           </div>
         )}
+
+        <div className="mt-12">
+          <h2 className="text-xl font-semibold text-gray-900 mb-6">Contact Submissions</h2>
+          {contacts.length === 0 ? (
+            <div className="text-center py-12 bg-white rounded-lg shadow">
+              <p className="text-gray-500">No contact submissions yet.</p>
+            </div>
+          ) : (
+            <div className="bg-white shadow overflow-hidden sm:rounded-md">
+              <ul className="divide-y divide-gray-200">
+                {contacts.map((contact) => (
+                  <li key={contact._id}>
+                    <div className="px-4 py-4 sm:px-6 hover:bg-gray-50">
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center space-x-3">
+                            <h3 className="text-lg font-medium text-gray-900">
+                              {contact.name}
+                            </h3>
+                            {!contact.read && (
+                              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                New
+                              </span>
+                            )}
+                          </div>
+                          <p className="mt-1 text-sm text-gray-600">
+                            <a href={`mailto:${contact.email}`} className="hover:text-blue-600">
+                              {contact.email}
+                            </a>
+                          </p>
+                          <p className="mt-2 text-sm text-gray-700 whitespace-pre-wrap">
+                            {contact.message}
+                          </p>
+                          <p className="mt-2 text-xs text-gray-500">
+                            {new Date(contact.createdAt).toLocaleString()}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
       </main>
     </div>
   );

@@ -22,10 +22,14 @@ export default function Footer() {
           </div>
           <div>
             <h3 className="text-xl font-bold mb-4">Connect</h3>
-            <div className="space-y-2 text-gray-400">
-              <p>Email: your.email@example.com</p>
-              <p>GitHub: github.com/yourusername</p>
-              <p>LinkedIn: linkedin.com/in/yourprofile</p>
+            <div className="space-y-3 text-gray-400">
+              <p>Email: oscar.ramos.andres@gmail.com</p>
+              <p>
+                <a href="https://github.com/Elchamos64" className="hover:text-white transition-colors block">GitHub</a>
+              </p>
+              <p>
+                <a href="https://www.linkedin.com/in/oscar-ramos-7aab1a237/" className="hover:text-white transition-colors block">LinkedIn</a>
+              </p>
             </div>
           </div>
         </div>

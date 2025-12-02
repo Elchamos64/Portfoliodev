@@ -20,10 +20,10 @@ export default function About() {
         <section className="mb-12">
           <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Education</h2>
           <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-4">
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Your Degree</h3>
-            <p className="text-gray-600 dark:text-gray-400">University Name • Year</p>
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Software Engineer</h3>
+            <p className="text-gray-600 dark:text-gray-400">Brigham Young University Idaho</p>
             <p className="text-gray-600 dark:text-gray-300 mt-2">
-              Brief description of your education and relevant coursework.
+              Software engineering major and web development minor with a focus on full-stack development.
             </p>
           </div>
         </section>
@@ -32,8 +32,8 @@ export default function About() {
           <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Experience</h2>
           <div className="space-y-6">
             <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Job Title</h3>
-              <p className="text-gray-600 dark:text-gray-400">Company Name • Duration</p>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Full-Stack Web Developer</h3>
+              <p className="text-gray-600 dark:text-gray-400">DataThink.io • September 2025 - Present</p>
               <p className="text-gray-600 dark:text-gray-300 mt-2">
                 Description of your role and key achievements.
               </p>

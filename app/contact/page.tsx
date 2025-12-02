@@ -16,28 +16,28 @@ export default function Contact() {
       <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
           <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Email</h3>
-          <p className="text-gray-600 dark:text-gray-300">your.email@example.com</p>
+          <p className="text-gray-600 dark:text-gray-300">oscar.ramos.andres@gmail.com</p>
         </div>
         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
           <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">GitHub</h3>
           <a
-            href="https://github.com/yourusername"
+            href="https://github.com/Elchamos64"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 dark:text-blue-400 hover:underline"
           >
-            github.com/yourusername
+            Elchamos64
           </a>
         </div>
         <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
           <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">LinkedIn</h3>
           <a
-            href="https://linkedin.com/in/yourprofile"
+            href="https://www.linkedin.com/in/oscar-ramos-7aab1a237/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 dark:text-blue-400 hover:underline"
           >
-            linkedin.com/in/yourprofile
+            Oscar Ramos
           </a>
         </div>
       </div>
