@@ -2,14 +2,18 @@ import Hero from '@/components/Hero';
 import ProjectCard from '@/components/ProjectCard';
 import { SiNextdotjs, SiReact, SiTypescript, SiTailwindcss, SiMongodb, SiNodedotjs, SiGit } from 'react-icons/si';
 import { FaServer } from 'react-icons/fa';
+import dbConnect from '@/lib/mongodb';
+import Project from '@/lib/models/Project';
 
 async function getFeaturedProjects() {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_URL || 'http://localhost:3000'}/api/projects?featured=true`, {
-      cache: 'no-store'
-    });
-    if (!response.ok) return [];
-    return response.json();
+    await dbConnect();
+    const projects = await Project.find({ featured: true }).sort({ order: 1, createdAt: -1 }).lean();
+    // Convert MongoDB documents to plain objects and serialize _id
+    return projects.map((project: any) => ({
+      ...project,
+      _id: project._id.toString(),
+    }));
   } catch (error) {
     console.error('Error fetching featured projects:', error);
     return [];
