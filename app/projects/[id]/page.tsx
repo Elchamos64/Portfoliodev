@@ -1,13 +1,15 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import dbConnect from '@/lib/mongodb';
+import Project from '@/lib/models/Project';
 
 async function getProject(id: string) {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_URL || 'http://localhost:3000'}/api/projects/${id}`, {
-      cache: 'no-store'
-    });
-    if (!response.ok) return null;
-    return response.json();
+    await dbConnect();
+    const project = await Project.findById(id).lean();
+    if (!project) return null;
+    // Convert MongoDB document to plain object with string _id
+    return JSON.parse(JSON.stringify(project));
   } catch (error) {
     console.error('Error fetching project:', error);
     return null;
