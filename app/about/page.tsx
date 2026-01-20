@@ -70,7 +70,7 @@ export default function About() {
         <section>
           <h2 className="text-2xl font-semibold text-black dark:text-white mb-4">Download Resume</h2>
           <a
-            href="/resume.pdf"
+            href="/Oscar_Ramos_Resume.pdf"
             download="Oscar_Ramos_Resume.pdf"
             className="inline-block bg-black dark:bg-neon text-white dark:text-black px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 dark:hover:shadow-neon transition-all"
           >
