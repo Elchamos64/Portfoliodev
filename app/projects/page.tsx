@@ -59,7 +59,7 @@ export default function Projects() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-8">All Projects</h1>
+      <h1 className="text-4xl font-bold text-black dark:text-white mb-8">All <span className="dark:text-neon">Projects</span></h1>
 
       <div className="mb-8 space-y-4">
         <input
@@ -67,16 +67,16 @@ export default function Projects() {
           placeholder="Search projects..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-black dark:focus:ring-neon focus:border-black dark:focus:border-neon bg-white dark:bg-black text-black dark:text-white"
         />
 
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setSelectedTech('all')}
-            className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+            className={`px-4 py-2 rounded-lg font-semibold transition-all ${
               selectedTech === 'all'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300'
+                ? 'bg-black dark:bg-neon text-white dark:text-black'
+                : 'bg-gray-100 dark:bg-gray-800 text-black dark:text-white border border-gray-200 dark:border-gray-700 hover:border-gray-400 dark:hover:border-neon'
             }`}
           >
             All
@@ -85,10 +85,10 @@ export default function Projects() {
             <button
               key={tech}
               onClick={() => setSelectedTech(tech)}
-              className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
                 selectedTech === tech
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300'
+                  ? 'bg-black dark:bg-neon text-white dark:text-black'
+                  : 'bg-gray-100 dark:bg-gray-800 text-black dark:text-white border border-gray-200 dark:border-gray-700 hover:border-gray-400 dark:hover:border-neon'
               }`}
             >
               {tech}
