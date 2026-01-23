@@ -5,6 +5,8 @@ import { FaServer } from 'react-icons/fa';
 import dbConnect from '@/lib/mongodb';
 import Project from '@/lib/models/Project';
 
+export const dynamic = 'force-dynamic';
+
 async function getFeaturedProjects() {
   try {
     await dbConnect();

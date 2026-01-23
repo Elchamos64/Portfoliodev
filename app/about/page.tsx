@@ -7,7 +7,7 @@ export default function About() {
         <section className="mb-12">
           <h2 className="text-2xl font-semibold text-black dark:text-white mb-4">Professional Bio</h2>
           <p className="text-gray-600 dark:text-gray-300 mb-4">
-            I&apos;m a passionate web developer with expertise in building modern, responsive, and scalable web applications.
+            I&apos;m a passionate web developer with experience in building modern, responsive, and scalable web applications.
             With a strong foundation in both frontend and backend technologies.
           </p>
         </section>
@@ -29,16 +29,22 @@ export default function About() {
             <div className="bg-white dark:bg-black p-6 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-neon transition-colors">
               <h3 className="text-xl font-semibold text-black dark:text-white">Full-Stack Web Developer</h3>
               <p className="text-gray-600 dark:text-neon">DataThink.io • September 2025 - Present</p>
-              <p className="text-gray-600 dark:text-gray-300 mt-2">
-                Description of your role and key achievements.
-              </p>
+              <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 mt-2 space-y-1">
+                <li>Built and maintain a full-stack order management platform using React, Python (FastAPI), and PostgreSQL</li>
+                <li>Monitor and maintain production systems, rapidly deploying fixes and updates to improve performance</li>
+                <li>Streamline ordering and patient management workflows</li>
+                <li>Practice Agile development through bi-weekly sprint planning, weekly stand-ups, and regular code reviews</li>
+              </ul>
             </div>
             <div className="bg-white dark:bg-black p-6 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-neon transition-colors">
-              <h3 className="text-xl font-semibold text-black dark:text-white">Previous Job Title</h3>
-              <p className="text-gray-600 dark:text-neon">Previous Company • Duration</p>
-              <p className="text-gray-600 dark:text-gray-300 mt-2">
-                Description of your role and key achievements.
-              </p>
+              <h3 className="text-xl font-semibold text-black dark:text-white">Frontend Web Developer</h3>
+              <p className="text-gray-600 dark:text-neon">Vorp Energy • May 2025 - September 2025</p>
+              <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 mt-2 space-y-1">
+                <li>Maintain and update WordPress website content, including WooCommerce product pages</li>
+                <li>Build and style new pages using WordPress and Visual Composer based on Canva design mockups</li>
+                <li>Ensure all site updates are responsive and visually aligned with brand guidelines</li>
+                <li>Collaborate with the Marketing Manager to prioritize and execute web content updates</li>
+              </ul>
             </div>
           </div>
         </section>
