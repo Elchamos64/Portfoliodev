@@ -34,7 +34,7 @@ export default function Navbar() {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link href="/" className="text-2xl font-bold text-black dark:text-neon">
-              Portfolio
+              Oscar Ramos
             </Link>
           </div>
           <div className="flex items-center space-x-8">

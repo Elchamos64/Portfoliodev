@@ -1,9 +1,10 @@
 import Hero from '@/components/Hero';
 import ProjectCard from '@/components/ProjectCard';
-import { SiNextdotjs, SiReact, SiTypescript, SiTailwindcss, SiMongodb, SiNodedotjs, SiGit } from 'react-icons/si';
+import { SiNextdotjs, SiReact, SiTypescript, SiTailwindcss, SiMongodb, SiGooglecloud, SiGit } from 'react-icons/si';
 import { FaServer } from 'react-icons/fa';
 import dbConnect from '@/lib/mongodb';
 import Project from '@/lib/models/Project';
+import { BiLogoPostgresql } from 'react-icons/bi';
 
 export const dynamic = 'force-dynamic';
 
@@ -58,9 +59,9 @@ export default async function Home() {
               { name: 'TypeScript', icon: <SiTypescript className="text-5xl mb-3 text-blue-600" /> },
               { name: 'Tailwind CSS', icon: <SiTailwindcss className="text-5xl mb-3 text-teal-500 dark:text-neon" /> },
               { name: 'MongoDB', icon: <SiMongodb className="text-5xl mb-3 text-green-600" /> },
-              { name: 'Node.js', icon: <SiNodedotjs className="text-5xl mb-3 text-green-500" /> },
+              { name: 'GCP', icon: <SiGooglecloud className="text-5xl mb-3" /> },
               { name: 'Git', icon: <SiGit className="text-5xl mb-3 text-orange-600" /> },
-              { name: 'REST APIs', icon: <FaServer className="text-5xl mb-3 text-gray-600 dark:text-neon" /> }
+              { name: 'PostgreSQL', icon: <BiLogoPostgresql className="text-5xl mb-3 text-gray-600 dark:text-neon" /> }
             ].map((skill) => (
               <div
                 key={skill.name}
