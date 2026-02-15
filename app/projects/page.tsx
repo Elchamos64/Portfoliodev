@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import ProjectCard from '@/components/ProjectCard';
+import ScrollReveal from '@/components/animations/ScrollReveal';
 import { Project } from '@/types';
 
 export default function Projects() {
@@ -59,7 +60,9 @@ export default function Projects() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h1 className="text-4xl font-bold text-black dark:text-white mb-8">All <span className="dark:text-neon">Projects</span></h1>
+      <ScrollReveal variant="fade-up">
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-8">All Projects</h1>
+      </ScrollReveal>
 
       <div className="mb-8 space-y-4">
         <input
@@ -67,7 +70,7 @@ export default function Projects() {
           placeholder="Search projects..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-black dark:focus:ring-neon focus:border-black dark:focus:border-neon bg-white dark:bg-black text-black dark:text-white"
+          className="w-full px-4 py-2 border border-gray-200 dark:border-gray-800 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-gray-900 dark:focus:border-white bg-white dark:bg-black text-gray-900 dark:text-white"
         />
 
         <div className="flex flex-wrap gap-2">
@@ -75,8 +78,8 @@ export default function Projects() {
             onClick={() => setSelectedTech('all')}
             className={`px-4 py-2 rounded-lg font-semibold transition-all ${
               selectedTech === 'all'
-                ? 'bg-black dark:bg-neon text-white dark:text-black'
-                : 'bg-gray-100 dark:bg-gray-800 text-black dark:text-white border border-gray-200 dark:border-gray-700 hover:border-gray-400 dark:hover:border-neon'
+                ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
+                : 'bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600'
             }`}
           >
             All
@@ -87,8 +90,8 @@ export default function Projects() {
               onClick={() => setSelectedTech(tech)}
               className={`px-4 py-2 rounded-lg font-semibold transition-all ${
                 selectedTech === tech
-                  ? 'bg-black dark:bg-neon text-white dark:text-black'
-                  : 'bg-gray-100 dark:bg-gray-800 text-black dark:text-white border border-gray-200 dark:border-gray-700 hover:border-gray-400 dark:hover:border-neon'
+                  ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
+                  : 'bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600'
               }`}
             >
               {tech}
@@ -100,11 +103,13 @@ export default function Projects() {
       {loading ? (
         <p className="text-center text-gray-600 dark:text-gray-400">Loading projects...</p>
       ) : filteredProjects.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project) => (
-            <ProjectCard key={project._id} project={project} />
-          ))}
-        </div>
+        <ScrollReveal key={`${selectedTech}-${searchQuery}`} variant="fade-up" stagger={0.1}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredProjects.map((project) => (
+              <ProjectCard key={project._id} project={project} />
+            ))}
+          </div>
+        </ScrollReveal>
       ) : (
         <p className="text-center text-gray-600 dark:text-gray-400">
           No projects found. Try adjusting your filters.

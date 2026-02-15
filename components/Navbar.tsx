@@ -7,7 +7,6 @@ export default function Navbar() {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    // Check for saved preference or system preference
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -33,38 +32,38 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link href="/" className="text-2xl font-bold text-black dark:text-neon">
+            <Link href="/" className="text-2xl font-bold text-gray-900 dark:text-white">
               Oscar Ramos
             </Link>
           </div>
           <div className="flex items-center space-x-8">
             <Link
               href="/"
-              className="text-black dark:text-white hover:text-gray-600 dark:hover:text-neon transition-colors"
+              className="text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
             >
               Home
             </Link>
             <Link
               href="/about"
-              className="text-black dark:text-white hover:text-gray-600 dark:hover:text-neon transition-colors"
+              className="text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
             >
               About
             </Link>
             <Link
               href="/projects"
-              className="text-black dark:text-white hover:text-gray-600 dark:hover:text-neon transition-colors"
+              className="text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
             >
               Projects
             </Link>
             <Link
               href="/contact"
-              className="text-black dark:text-white hover:text-gray-600 dark:hover:text-neon transition-colors"
+              className="text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
             >
               Contact
             </Link>
             <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-lg border border-gray-300 dark:border-neon text-black dark:text-neon hover:bg-gray-100 dark:hover:shadow-neon transition-all"
+              className="p-2 rounded-lg border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 transition-all"
               aria-label="Toggle dark mode"
             >
               {darkMode ? (

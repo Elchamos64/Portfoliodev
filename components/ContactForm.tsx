@@ -38,7 +38,7 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
       <div className="mb-4">
-        <label htmlFor="name" className="block text-black dark:text-white font-semibold mb-2">
+        <label htmlFor="name" className="block text-gray-900 dark:text-white font-semibold mb-2">
           Name
         </label>
         <input
@@ -47,11 +47,11 @@ export default function ContactForm() {
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           required
-          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-black dark:focus:ring-neon focus:border-black dark:focus:border-neon bg-white dark:bg-black text-black dark:text-white"
+          className="w-full px-4 py-2 border border-gray-200 dark:border-gray-800 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-gray-900 dark:focus:border-white bg-white dark:bg-black text-gray-900 dark:text-white"
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="email" className="block text-black dark:text-white font-semibold mb-2">
+        <label htmlFor="email" className="block text-gray-900 dark:text-white font-semibold mb-2">
           Email
         </label>
         <input
@@ -60,11 +60,11 @@ export default function ContactForm() {
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           required
-          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-black dark:focus:ring-neon focus:border-black dark:focus:border-neon bg-white dark:bg-black text-black dark:text-white"
+          className="w-full px-4 py-2 border border-gray-200 dark:border-gray-800 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-gray-900 dark:focus:border-white bg-white dark:bg-black text-gray-900 dark:text-white"
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="message" className="block text-black dark:text-white font-semibold mb-2">
+        <label htmlFor="message" className="block text-gray-900 dark:text-white font-semibold mb-2">
           Message
         </label>
         <textarea
@@ -73,7 +73,7 @@ export default function ContactForm() {
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
           required
           rows={5}
-          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-black dark:focus:ring-neon focus:border-black dark:focus:border-neon bg-white dark:bg-black text-black dark:text-white"
+          className="w-full px-4 py-2 border border-gray-200 dark:border-gray-800 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-gray-900 dark:focus:border-white bg-white dark:bg-black text-gray-900 dark:text-white"
         />
       </div>
       {status === 'success' && (
@@ -89,7 +89,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="w-full bg-black dark:bg-neon text-white dark:text-black py-3 rounded-lg font-semibold hover:bg-gray-800 dark:hover:shadow-neon transition-all disabled:opacity-50"
+        className="w-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 py-3 rounded-lg font-semibold hover:bg-gray-700 dark:hover:bg-gray-200 transition-all disabled:opacity-50"
       >
         {status === 'loading' ? 'Sending...' : 'Send Message'}
       </button>

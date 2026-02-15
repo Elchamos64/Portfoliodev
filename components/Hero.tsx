@@ -1,29 +1,64 @@
-import Link from 'next/link';
+import Image from 'next/image';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { HiOutlineMail } from 'react-icons/hi';
 
 export default function Hero() {
   return (
-    <section className="bg-gray-50 dark:bg-black py-20 border-b border-gray-200 dark:border-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 className="text-5xl font-bold mb-6 text-black dark:text-white">
-          Welcome to My <span className="dark:text-neon">Portfolio</span>
-        </h1>
-        <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-600 dark:text-gray-300">
-          My name is Oscar Ramos and I am a Full Stack Developer and software engineer.
-          Explore my projects and get in touch!
-        </p>
-        <div className="flex gap-4 justify-center">
-          <Link
-            href="/projects"
-            className="bg-black dark:bg-neon text-white dark:text-black px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 dark:hover:shadow-neon transition-all"
-          >
-            View Projects
-          </Link>
-          <Link
-            href="/contact"
-            className="bg-transparent border-2 border-black dark:border-neon text-black dark:text-neon px-8 py-3 rounded-lg font-semibold hover:bg-black hover:text-white dark:hover:bg-neon dark:hover:text-black transition-all"
-          >
-            Contact Me
-          </Link>
+    <section className="bg-gray-50 dark:bg-black min-h-screen flex items-center">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+        <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
+          {/* Profile Photo */}
+          <div className="flex-shrink-0" data-hero-photo>
+            <div className="w-56 h-56 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-lg">
+              <Image
+                src="/profile.jpeg"
+                alt="Oscar Ramos"
+                width={256}
+                height={256}
+                className="w-full h-full object-cover object-[center_20%]"
+                priority
+              />
+            </div>
+          </div>
+
+          {/* Text Content */}
+          <div className="text-center md:text-left">
+            <h1 data-hero-name className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-3">
+              Oscar Ramos
+            </h1>
+            <p data-hero-title className="text-xl text-gray-500 dark:text-gray-400 mb-6">
+              Software Engineer
+            </p>
+
+            {/* Social Icons */}
+            <div data-hero-socials className="flex items-center gap-5 justify-center md:justify-start">
+              <a
+                href="https://github.com/Elchamos64"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
+                aria-label="GitHub"
+              >
+                <FaGithub className="w-6 h-6" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/oscar-ramos-7aab1a237/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin className="w-6 h-6" />
+              </a>
+              <a
+                href="mailto:oscar.ramos.andres@gmail.com"
+                className="text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors"
+                aria-label="Email"
+              >
+                <HiOutlineMail className="w-6 h-6" />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>

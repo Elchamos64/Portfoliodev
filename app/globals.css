@@ -5,7 +5,7 @@
 :root {
   --background: #ffffff;
   --foreground: #000000;
-  --neon: #00f5ff;
+
 }
 
 .dark {
@@ -26,16 +26,3 @@ body {
   }
 }
 
-@layer components {
-  .border-neon {
-    border-color: var(--neon);
-  }
-
-  .neon-glow {
-    box-shadow: 0 0 5px var(--neon), 0 0 20px rgba(0, 245, 255, 0.3);
-  }
-
-  .neon-glow-hover:hover {
-    box-shadow: 0 0 10px var(--neon), 0 0 30px rgba(0, 245, 255, 0.5);
-  }
-}

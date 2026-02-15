@@ -19,7 +19,7 @@ export default function AppleIcon() {
           alignItems: 'center',
           justifyContent: 'center',
           borderRadius: '40px',
-          color: '#00f5ff',
+          color: '#ffffff',
           fontWeight: 'bold',
           fontFamily: 'system-ui',
         }}

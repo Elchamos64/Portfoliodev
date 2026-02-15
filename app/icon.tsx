@@ -19,7 +19,7 @@ export default function Icon() {
           alignItems: 'center',
           justifyContent: 'center',
           borderRadius: '6px',
-          color: '#00f5ff',
+          color: '#ffffff',
           fontWeight: 'bold',
           fontFamily: 'system-ui',
         }}
