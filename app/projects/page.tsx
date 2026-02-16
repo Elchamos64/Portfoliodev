@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import ProjectCard from '@/components/ProjectCard';
 import ScrollReveal from '@/components/animations/ScrollReveal';
 import { Project } from '@/types';
@@ -11,14 +11,6 @@ export default function Projects() {
   const [selectedTech, setSelectedTech] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchProjects();
-  }, []);
-
-  useEffect(() => {
-    filterProjects();
-  }, [selectedTech, searchQuery, projects]);
 
   const fetchProjects = async () => {
     try {
@@ -35,7 +27,7 @@ export default function Projects() {
     }
   };
 
-  const filterProjects = () => {
+  const filterProjects = useCallback(() => {
     let filtered = projects;
 
     if (selectedTech !== 'all') {
@@ -52,7 +44,15 @@ export default function Projects() {
     }
 
     setFilteredProjects(filtered);
-  };
+  }, [projects, selectedTech, searchQuery]);
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
+  useEffect(() => {
+    filterProjects();
+  }, [filterProjects]);
 
   const allTechnologies = Array.from(
     new Set(projects.flatMap((project) => project.technologies))

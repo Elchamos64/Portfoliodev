@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import dbConnect from '@/lib/mongodb';
 import Project from '@/lib/models/Project';
 import ScrollReveal from '@/components/animations/ScrollReveal';
@@ -42,9 +43,11 @@ export default async function ProjectDetail({ params }: { params: Promise<{ id: 
       {project.imageUrl && (
         <ScrollReveal variant="fade-up" delay={0.1}>
           <div className="mb-8 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800 shadow-md">
-            <img
+            <Image
               src={project.imageUrl}
               alt={project.title}
+              width={896}
+              height={384}
               className="w-full h-96 object-cover"
             />
           </div>

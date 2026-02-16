@@ -20,7 +20,7 @@ export default function About() {
           <section className="mb-12">
             <p className="text-gray-600 dark:text-gray-400 mb-4">
               I&apos;m a passionate software engineer. I have experience building full-stack web applications.
-              When I'm not coding, I also enjoy playing and watching soccer, hiking, and spending time with my family. I am currently a software engineer at DataThink.io.
+              When I&apos;m not coding, I also enjoy playing and watching soccer, hiking, and spending time with my family. I am currently a software engineer at DataThink.io.
             </p>
           </section>
         </ScrollReveal>

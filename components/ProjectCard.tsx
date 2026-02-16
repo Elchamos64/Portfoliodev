@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { Project } from '@/types';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
@@ -18,9 +19,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     >
       {project.imageUrl && (
         <div className="h-56 bg-gray-100 dark:bg-gray-800 overflow-hidden">
-          <img
+          <Image
             src={project.imageUrl}
             alt={project.title}
+            width={400}
+            height={224}
             className="w-full h-full object-cover"
           />
         </div>
