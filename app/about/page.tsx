@@ -1,4 +1,12 @@
 import ScrollReveal from '@/components/animations/ScrollReveal';
+import HobbiesCarousel from '@/components/HobbiesCarousel';
+
+const hobbies = [
+  { src: '/images/hobbies/family.jpeg', alt: 'Hobby 1' },
+  { src: '/images/hobbies/soccer.jpeg', alt: 'Hobby 2' },
+  { src: '/images/hobbies/beach.jpeg', alt: 'Hobby 3'},
+  { src: '/images/hobbies/travel.jpeg', alt: 'Hobby 4'},
+];
 
 export default function About() {
   return (
@@ -10,11 +18,20 @@ export default function About() {
       <div className="prose dark:prose-invert max-w-none">
         <ScrollReveal variant="fade-up">
           <section className="mb-12">
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Professional Bio</h2>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
-              I&apos;m a passionate web developer with experience in building modern, responsive, and scalable web applications.
-              With a strong foundation in both frontend and backend technologies.
+              I&apos;m a passionate software engineer. I have experience building full-stack web applications.
+              When I'm not coding, I also enjoy playing and watching soccer, hiking, and spending time with my family. I am currently a software engineer at DataThink.io.
             </p>
+          </section>
+        </ScrollReveal>
+
+        <ScrollReveal variant="fade-up">
+          <section className="mb-12">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Hobbies & Interests</h2>
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
+              When I&apos;m not coding, here are some things I enjoy.
+            </p>
+            <HobbiesCarousel items={hobbies} />
           </section>
         </ScrollReveal>
 
@@ -25,7 +42,7 @@ export default function About() {
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Software Engineer</h3>
               <p className="text-gray-600 dark:text-gray-400">Brigham Young University Idaho</p>
               <p className="text-gray-600 dark:text-gray-400 mt-2">
-                Software engineering major and web development minor with a focus on full-stack development.
+                Bachelor of Science in Software Engineering, with a minor in Web Development.
               </p>
             </div>
           </section>

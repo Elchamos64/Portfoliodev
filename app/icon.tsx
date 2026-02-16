@@ -11,7 +11,7 @@ export default function Icon() {
     (
       <div
         style={{
-          fontSize: 24,
+          fontSize: 18,
           background: 'black',
           width: '100%',
           height: '100%',
@@ -21,10 +21,11 @@ export default function Icon() {
           borderRadius: '6px',
           color: '#ffffff',
           fontWeight: 'bold',
-          fontFamily: 'system-ui',
+          fontFamily: 'monospace',
+          letterSpacing: '-1px',
         }}
       >
-        P
+        &lt;/&gt;
       </div>
     ),
     {
