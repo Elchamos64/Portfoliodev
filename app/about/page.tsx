@@ -19,8 +19,7 @@ export default function About() {
         <ScrollReveal variant="fade-up">
           <section className="mb-12">
             <p className="text-gray-600 dark:text-gray-400 mb-4">
-              I&apos;m a passionate software engineer. I have experience building full-stack web applications.
-              When I&apos;m not coding, I also enjoy playing and watching soccer, hiking, and spending time with my family. I am currently a software engineer at DataThink.io.
+              I&apos;m a passionate software engineer. I have experience building full-stack web applications. I am currently a software engineer at <a href="https://datathink.io" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-900 dark:hover:text-white transition-colors">DataThink.io</a>.
             </p>
           </section>
         </ScrollReveal>

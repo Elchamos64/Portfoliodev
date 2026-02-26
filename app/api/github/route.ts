@@ -17,19 +17,23 @@ export async function GET() {
     next: { revalidate: 300 },
   };
 
+  const since = new Date(Date.now() - 60 * 24 * 60 * 60 * 1000)
+    .toISOString()
+    .split('T')[0];
+
   try {
-    const [reposRes, eventsRes] = await Promise.all([
+    const [reposRes, commitsRes] = await Promise.all([
       fetch(
-        `https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=10`,
+        `https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=30`,
         fetchOpts
       ),
       fetch(
-        `https://api.github.com/users/${USERNAME}/events?per_page=30`,
+        `https://api.github.com/search/commits?q=author:${USERNAME}+committer-date:>${since}&sort=committer-date&order=desc&per_page=100`,
         fetchOpts
       ),
     ]);
 
-    if (!reposRes.ok || !eventsRes.ok) {
+    if (!reposRes.ok || !commitsRes.ok) {
       return NextResponse.json(
         { error: 'Failed to fetch GitHub data' },
         { status: 502 }
@@ -37,12 +41,9 @@ export async function GET() {
     }
 
     const repos = await reposRes.json();
-    const allEvents = await eventsRes.json();
-    const events = allEvents.filter(
-      (e: { type: string }) => e.type === 'PushEvent'
-    );
+    const commitsData = await commitsRes.json();
 
-    return NextResponse.json({ repos, events });
+    return NextResponse.json({ repos, commits: commitsData.items ?? [] });
   } catch {
     return NextResponse.json(
       { error: 'Internal server error' },

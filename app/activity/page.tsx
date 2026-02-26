@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { FiGithub, FiStar, FiGitBranch, FiCode } from 'react-icons/fi';
 import ScrollReveal from '@/components/animations/ScrollReveal';
+import GitHubContributionGraph from '@/components/GitHubContributionGraph';
 
 interface Repo {
   id: number;
@@ -15,17 +16,20 @@ interface Repo {
   updated_at: string;
 }
 
-interface PushEvent {
-  id: string;
-  repo: { name: string };
-  payload: {
-    ref: string;
-    commits: { sha: string; message: string }[];
+interface CommitResult {
+  sha: string;
+  html_url: string;
+  commit: {
+    message: string;
+    author: { date: string };
   };
-  created_at: string;
+  repository: {
+    name: string;
+    html_url: string;
+  };
 }
 
-type Tab = 'repos' | 'pushes';
+type Tab = 'repos' | 'commits';
 
 function timeAgo(dateStr: string): string {
   const diff = Date.now() - new Date(dateStr).getTime();
@@ -40,7 +44,7 @@ function timeAgo(dateStr: string): string {
 export default function ActivityPage() {
   const [tab, setTab] = useState<Tab>('repos');
   const [repos, setRepos] = useState<Repo[]>([]);
-  const [events, setEvents] = useState<PushEvent[]>([]);
+  const [commits, setCommits] = useState<CommitResult[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -52,7 +56,7 @@ export default function ActivityPage() {
       })
       .then((data) => {
         setRepos(data.repos);
-        setEvents(data.events);
+        setCommits(data.commits);
       })
       .catch(() => setError(true))
       .finally(() => setLoading(false));
@@ -75,7 +79,7 @@ export default function ActivityPage() {
           </h1>
         </div>
         <p className="text-gray-600 dark:text-gray-400 mb-8">
-          Public repositories and recent push events for{' '}
+          Public repositories and commits from the last 60 days for{' '}
           <a
             href="https://github.com/Elchamos64"
             target="_blank"
@@ -88,12 +92,18 @@ export default function ActivityPage() {
       </ScrollReveal>
 
       <ScrollReveal variant="fade-up" delay={0.1}>
+        <div className="mb-8 p-5 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-black">
+          <GitHubContributionGraph />
+        </div>
+      </ScrollReveal>
+
+      <ScrollReveal variant="fade-up" delay={0.15}>
         <div className="flex gap-2 mb-8">
           <button className={tabClass('repos')} onClick={() => setTab('repos')}>
             Repositories
           </button>
-          <button className={tabClass('pushes')} onClick={() => setTab('pushes')}>
-            Recent Pushes
+          <button className={tabClass('commits')} onClick={() => setTab('commits')}>
+            Commits
           </button>
         </div>
       </ScrollReveal>
@@ -157,50 +167,38 @@ export default function ActivityPage() {
         </ScrollReveal>
       )}
 
-      {!loading && !error && tab === 'pushes' && (
-        <ScrollReveal variant="fade-up" stagger={0.07}>
-          <div className="flex flex-col gap-4">
-            {events.length === 0 && (
+      {!loading && !error && tab === 'commits' && (
+        <ScrollReveal variant="fade-up" stagger={0.04}>
+          <div className="flex flex-col gap-3">
+            {commits.length === 0 && (
               <p className="text-center text-gray-600 dark:text-gray-400">
-                No recent push events found.
+                No commits found in the last 60 days.
               </p>
             )}
-            {events.map((event) => {
-              const branch = event.payload.ref.replace('refs/heads/', '');
-              const commits = event.payload.commits.slice(0, 3);
-              return (
-                <div
-                  key={event.id}
-                  className="p-5 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-black"
-                >
-                  <div className="flex items-center justify-between gap-2 mb-1 flex-wrap">
-                    <span className="font-semibold text-gray-900 dark:text-white">
-                      {event.repo.name.split('/')[1] ?? event.repo.name}
-                    </span>
-                    <span className="text-xs text-gray-500 dark:text-gray-400">
-                      {timeAgo(event.created_at)}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1 text-xs text-gray-500 dark:text-gray-400 mb-3">
-                    <FiGitBranch className="w-3 h-3" />
-                    <span>{branch}</span>
-                  </div>
-                  <ul className="space-y-1">
-                    {commits.map((c) => (
-                      <li
-                        key={c.sha}
-                        className="text-sm text-gray-700 dark:text-gray-300 flex items-start gap-2"
-                      >
-                        <span className="font-mono text-xs text-gray-400 shrink-0 pt-0.5">
-                          {c.sha.slice(0, 7)}
-                        </span>
-                        <span className="line-clamp-2">{c.message.split('\n')[0]}</span>
-                      </li>
-                    ))}
-                  </ul>
+            {commits.map((c) => (
+              <a
+                key={c.sha}
+                href={c.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-3 p-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-black hover:border-gray-400 dark:hover:border-gray-600 transition-all group"
+              >
+                <span className="font-mono text-xs text-gray-400 shrink-0 pt-0.5 w-16">
+                  {c.sha.slice(0, 7)}
+                </span>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm text-gray-900 dark:text-white group-hover:underline line-clamp-2">
+                    {c.commit.message.split('\n')[0]}
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    {c.repository.name}
+                  </p>
                 </div>
-              );
-            })}
+                <span className="text-xs text-gray-400 shrink-0">
+                  {timeAgo(c.commit.author.date)}
+                </span>
+              </a>
+            ))}
           </div>
         </ScrollReveal>
       )}
