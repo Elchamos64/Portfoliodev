@@ -26,11 +26,6 @@ export default function HeroAnimation({ children }: HeroAnimationProps) {
         duration: 0.8,
       })
         .from(
-          '[data-hero-name]',
-          { y: 30, opacity: 0, duration: 0.6 },
-          '-=0.3'
-        )
-        .from(
           '[data-hero-title]',
           { y: 20, opacity: 0, duration: 0.5 },
           '-=0.2'

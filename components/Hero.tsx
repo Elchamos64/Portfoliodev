@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
+import TypingName from '@/components/TypingName';
 
 export default function Hero() {
   return (
@@ -24,7 +25,7 @@ export default function Hero() {
           {/* Text Content */}
           <div className="text-center md:text-left">
             <h1 data-hero-name className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-3">
-              Oscar Ramos
+              <TypingName text="Oscar Ramos" delay={400} speed={90} />
             </h1>
             <p data-hero-title className="text-xl text-gray-500 dark:text-gray-400 mb-6">
               Software Engineer
