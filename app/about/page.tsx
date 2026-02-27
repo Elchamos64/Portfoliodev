@@ -37,7 +37,7 @@ export default function About() {
         <ScrollReveal variant="fade-up">
           <section className="mb-12">
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Education</h2>
-            <div className="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600 transition-colors mb-4">
+            <div className="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600 hover:-translate-y-1 hover:shadow-md transition-all duration-300 mb-4">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Software Engineer</h3>
               <p className="text-gray-600 dark:text-gray-400">Brigham Young University Idaho</p>
               <p className="text-gray-600 dark:text-gray-400 mt-2">
@@ -54,7 +54,7 @@ export default function About() {
         </ScrollReveal>
         <ScrollReveal variant="fade-up" stagger={0.15}>
           <div className="space-y-6 mb-12">
-            <div className="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600 transition-colors">
+            <div className="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Full-Stack Web Developer</h3>
               <p className="text-gray-600 dark:text-gray-400">DataThink.io • September 2025 - Present</p>
               <ul className="list-disc list-inside text-gray-600 dark:text-gray-400 mt-2 space-y-1">
@@ -64,7 +64,7 @@ export default function About() {
                 <li>Practice Agile development through bi-weekly sprint planning, weekly stand-ups, and regular code reviews</li>
               </ul>
             </div>
-            <div className="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600 transition-colors">
+            <div className="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Frontend Web Developer</h3>
               <p className="text-gray-600 dark:text-gray-400">Vorp Energy • May 2025 - September 2025</p>
               <ul className="list-disc list-inside text-gray-600 dark:text-gray-400 mt-2 space-y-1">
@@ -109,7 +109,7 @@ export default function About() {
             <a
               href="/Oscar_Ramos_Resume.pdf"
               download="Oscar_Ramos_Resume.pdf"
-              className="inline-block bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 dark:hover:bg-gray-200 transition-all"
+              className="inline-block bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 dark:hover:bg-gray-200 hover:scale-105 hover:shadow-lg active:scale-95 transition-all duration-200"
             >
               Download Resume (PDF)
             </a>

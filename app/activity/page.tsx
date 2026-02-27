@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { FiGithub, FiStar, FiGitBranch, FiCode } from 'react-icons/fi';
 import ScrollReveal from '@/components/animations/ScrollReveal';
 import GitHubContributionGraph from '@/components/GitHubContributionGraph';
+import { useEffect } from 'react';
 
 interface Repo {
   id: number;
@@ -120,87 +121,98 @@ export default function ActivityPage() {
         </p>
       )}
 
+      {/* ── Repos tab ── */}
       {!loading && !error && tab === 'repos' && (
-        <ScrollReveal variant="fade-up" stagger={0.07}>
+        <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {repos.map((repo) => (
-              <a
+            {repos.map((repo, i) => (
+              <ScrollReveal
                 key={repo.id}
-                href={repo.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block p-5 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-black hover:border-gray-400 dark:hover:border-gray-600 transition-all group"
+                variant="fade-up"
+                delay={(i % 3) * 0.08}
+                className="h-full"
               >
-                <div className="flex items-start justify-between gap-2 mb-2">
-                  <h2 className="font-semibold text-gray-900 dark:text-white group-hover:underline break-all">
-                    {repo.name}
-                  </h2>
-                  <FiGithub className="shrink-0 w-4 h-4 text-gray-400" />
-                </div>
+                <a
+                  href={repo.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-full flex flex-col p-5 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-black hover:border-gray-400 dark:hover:border-gray-600 hover:-translate-y-1 hover:shadow-md transition-all duration-300 group"
+                >
+                  <div className="flex items-start justify-between gap-2 mb-2">
+                    <h2 className="font-semibold text-gray-900 dark:text-white group-hover:underline break-all">
+                      {repo.name}
+                    </h2>
+                    <FiGithub className="shrink-0 w-4 h-4 text-gray-400" />
+                  </div>
 
-                {repo.description && (
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2">
-                    {repo.description}
-                  </p>
-                )}
-
-                <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500 dark:text-gray-400 mt-auto">
-                  {repo.language && (
-                    <span className="flex items-center gap-1">
-                      <FiCode className="w-3 h-3" />
-                      {repo.language}
-                    </span>
+                  {repo.description && (
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2 flex-1">
+                      {repo.description}
+                    </p>
                   )}
-                  <span className="flex items-center gap-1">
-                    <FiStar className="w-3 h-3" />
-                    {repo.stargazers_count}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <FiGitBranch className="w-3 h-3" />
-                    {repo.forks_count}
-                  </span>
-                  <span className="ml-auto">{timeAgo(repo.updated_at)}</span>
-                </div>
-              </a>
+
+                  <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500 dark:text-gray-400 mt-auto">
+                    {repo.language && (
+                      <span className="flex items-center gap-1">
+                        <FiCode className="w-3 h-3" />
+                        {repo.language}
+                      </span>
+                    )}
+                    <span className="flex items-center gap-1">
+                      <FiStar className="w-3 h-3" />
+                      {repo.stargazers_count}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <FiGitBranch className="w-3 h-3" />
+                      {repo.forks_count}
+                    </span>
+                    <span className="ml-auto">{timeAgo(repo.updated_at)}</span>
+                  </div>
+                </a>
+              </ScrollReveal>
             ))}
           </div>
-        </ScrollReveal>
+
+        </>
       )}
 
+      {/* ── Commits tab ── */}
       {!loading && !error && tab === 'commits' && (
-        <ScrollReveal variant="fade-up" stagger={0.04}>
+        <>
           <div className="flex flex-col gap-3">
             {commits.length === 0 && (
               <p className="text-center text-gray-600 dark:text-gray-400">
                 No commits found in the last 60 days.
               </p>
             )}
-            {commits.map((c) => (
-              <a
-                key={c.sha}
-                href={c.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-start gap-3 p-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-black hover:border-gray-400 dark:hover:border-gray-600 transition-all group"
-              >
-                <span className="font-mono text-xs text-gray-400 shrink-0 pt-0.5 w-16">
-                  {c.sha.slice(0, 7)}
-                </span>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm text-gray-900 dark:text-white group-hover:underline line-clamp-2">
-                    {c.commit.message.split('\n')[0]}
-                  </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                    {c.repository.name}
-                  </p>
-                </div>
-                <span className="text-xs text-gray-400 shrink-0">
-                  {timeAgo(c.commit.author.date)}
-                </span>
-              </a>
+            {commits.map((c, i) => (
+              <ScrollReveal key={c.sha} variant="fade-up" delay={i * 0.08}>
+                <a
+                  href={c.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-3 p-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-black hover:border-gray-400 dark:hover:border-gray-600 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300 group"
+                >
+                  <span className="font-mono text-xs text-gray-400 shrink-0 pt-0.5 w-16">
+                    {c.sha.slice(0, 7)}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-gray-900 dark:text-white group-hover:underline line-clamp-2">
+                      {c.commit.message.split('\n')[0]}
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                      {c.repository.name}
+                    </p>
+                  </div>
+                  <span className="text-xs text-gray-400 shrink-0">
+                    {timeAgo(c.commit.author.date)}
+                  </span>
+                </a>
+              </ScrollReveal>
             ))}
           </div>
-        </ScrollReveal>
+
+        </>
       )}
     </div>
   );

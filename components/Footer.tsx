@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             <a
               href="mailto:oscar.ramos.andres@gmail.com"
-              className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+              className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:scale-125 hover:-translate-y-1 transition-all duration-200"
               aria-label="Email"
             >
               <HiOutlineMail className="w-5 h-5" />
@@ -21,7 +21,7 @@ export default function Footer() {
               href="https://github.com/Elchamos64"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+              className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:scale-125 hover:-translate-y-1 transition-all duration-200"
               aria-label="GitHub"
             >
               <FaGithub className="w-5 h-5" />
@@ -30,7 +30,7 @@ export default function Footer() {
               href="https://www.linkedin.com/in/oscar-ramos-7aab1a237/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+              className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:scale-125 hover:-translate-y-1 transition-all duration-200"
               aria-label="LinkedIn"
             >
               <FaLinkedin className="w-5 h-5" />

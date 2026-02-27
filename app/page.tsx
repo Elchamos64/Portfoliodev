@@ -74,7 +74,7 @@ export default async function Home() {
               ].map((skill) => (
                 <div
                   key={skill.name}
-                  className="bg-white dark:bg-gray-900 p-6 rounded-lg text-center border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600 transition-all"
+                  className="bg-white dark:bg-gray-900 p-6 rounded-lg text-center border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600 hover:-translate-y-1 hover:shadow-md transition-all duration-300"
                 >
                   <div className="flex justify-center">{skill.icon}</div>
                   <h3 className="font-semibold text-gray-900 dark:text-white">{skill.name}</h3>

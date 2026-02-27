@@ -22,11 +22,11 @@ export default function Contact() {
 
       <ScrollReveal variant="fade-up" stagger={0.15}>
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-          <div className="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600 transition-colors">
+          <div className="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Email</h3>
             <p className="text-gray-600 dark:text-gray-400">oscar.ramos.andres@gmail.com</p>
           </div>
-          <div className="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600 transition-colors">
+          <div className="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">GitHub</h3>
             <a
               href="https://github.com/Elchamos64"
@@ -37,7 +37,7 @@ export default function Contact() {
               Elchamos64
             </a>
           </div>
-          <div className="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600 transition-colors">
+          <div className="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">LinkedIn</h3>
             <a
               href="https://www.linkedin.com/in/oscar-ramos-7aab1a237/"

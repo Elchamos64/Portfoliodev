@@ -39,37 +39,37 @@ export default function Navbar() {
           <div className="flex items-center space-x-8">
             <Link
               href="/"
-              className="text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              className="text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 hover:-translate-y-0.5 transition-all duration-200"
             >
               Home
             </Link>
             <Link
               href="/about"
-              className="text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              className="text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 hover:-translate-y-0.5 transition-all duration-200"
             >
               About
             </Link>
             <Link
               href="/projects"
-              className="text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              className="text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 hover:-translate-y-0.5 transition-all duration-200"
             >
               Projects
             </Link>
             <Link
               href="/activity"
-              className="text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              className="text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 hover:-translate-y-0.5 transition-all duration-200"
             >
               Activity
             </Link>
             <Link
               href="/contact"
-              className="text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              className="text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 hover:-translate-y-0.5 transition-all duration-200"
             >
               Contact
             </Link>
             <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-lg border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 transition-all"
+              className="p-2 rounded-lg border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 hover:scale-110 active:scale-95 transition-all duration-200"
               aria-label="Toggle dark mode"
             >
               {darkMode ? (
