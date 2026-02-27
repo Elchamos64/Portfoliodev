@@ -36,7 +36,7 @@ export default function Hero() {
                 href="https://github.com/Elchamos64"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-500 hover:text-gray-900 dark:hover:text-white hover:scale-125 hover:-translate-y-1 transition-all duration-200"
+                className="text-gray-500 hover:text-gray-900 dark:hover:text-white hover:scale-125 hover:-translate-y-1 transition-[color,transform] duration-200"
                 aria-label="GitHub"
               >
                 <FaGithub className="w-6 h-6" />
@@ -45,14 +45,14 @@ export default function Hero() {
                 href="https://www.linkedin.com/in/oscar-ramos-7aab1a237/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-500 hover:text-gray-900 dark:hover:text-white hover:scale-125 hover:-translate-y-1 transition-all duration-200"
+                className="text-gray-500 hover:text-gray-900 dark:hover:text-white hover:scale-125 hover:-translate-y-1 transition-[color,transform] duration-200"
                 aria-label="LinkedIn"
               >
                 <FaLinkedin className="w-6 h-6" />
               </a>
               <a
                 href="mailto:oscar.ramos.andres@gmail.com"
-                className="text-gray-500 hover:text-gray-900 dark:hover:text-white hover:scale-125 hover:-translate-y-1 transition-all duration-200"
+                className="text-gray-500 hover:text-gray-900 dark:hover:text-white hover:scale-125 hover:-translate-y-1 transition-[color,transform] duration-200"
                 aria-label="Email"
               >
                 <HiOutlineMail className="w-6 h-6" />

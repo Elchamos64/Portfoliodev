@@ -60,24 +60,84 @@ export default async function Home() {
               Skills & Technologies
             </h2>
           </ScrollReveal>
-          <ScrollReveal variant="fade-up" stagger={0.1}>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <ScrollReveal variant="fade-up" stagger={0.08}>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
               {[
-                { name: 'Next.js', icon: <SiNextdotjs className="text-5xl mb-3" /> },
-                { name: 'React', icon: <SiReact className="text-5xl mb-3 text-blue-500" /> },
-                { name: 'TypeScript', icon: <SiTypescript className="text-5xl mb-3 text-blue-600" /> },
-                { name: 'Tailwind CSS', icon: <SiTailwindcss className="text-5xl mb-3 text-teal-500" /> },
-                { name: 'MongoDB', icon: <SiMongodb className="text-5xl mb-3 text-green-600" /> },
-                { name: 'GCP', icon: <SiGooglecloud className="text-5xl mb-3" /> },
-                { name: 'Git', icon: <SiGit className="text-5xl mb-3 text-orange-600" /> },
-                { name: 'PostgreSQL', icon: <BiLogoPostgresql className="text-5xl mb-3 text-blue-800" /> },
+                {
+                  name: 'Next.js',
+                  icon: <SiNextdotjs className="text-4xl text-gray-900 dark:text-white" />,
+                  accent: '#a1a1aa',
+                  bg: 'rgba(161,161,170,0.12)',
+                },
+                {
+                  name: 'React',
+                  icon: <SiReact className="text-4xl text-[#61DAFB]" />,
+                  accent: '#61DAFB',
+                  bg: 'rgba(97,218,251,0.12)',
+                },
+                {
+                  name: 'TypeScript',
+                  icon: <SiTypescript className="text-4xl text-[#3178C6]" />,
+                  accent: '#3178C6',
+                  bg: 'rgba(49,120,198,0.12)',
+                },
+                {
+                  name: 'Tailwind CSS',
+                  icon: <SiTailwindcss className="text-4xl text-[#06B6D4]" />,
+                  accent: '#06B6D4',
+                  bg: 'rgba(6,182,212,0.12)',
+                },
+                {
+                  name: 'MongoDB',
+                  icon: <SiMongodb className="text-4xl text-[#47A248]" />,
+                  accent: '#47A248',
+                  bg: 'rgba(71,162,72,0.12)',
+                },
+                {
+                  name: 'GCP',
+                  icon: <SiGooglecloud className="text-4xl text-[#4285F4]" />,
+                  accent: '#4285F4',
+                  bg: 'rgba(66,133,244,0.12)',
+                },
+                {
+                  name: 'Git',
+                  icon: <SiGit className="text-4xl text-[#F05032]" />,
+                  accent: '#F05032',
+                  bg: 'rgba(240,80,50,0.12)',
+                },
+                {
+                  name: 'PostgreSQL',
+                  icon: <BiLogoPostgresql className="text-4xl text-[#336791]" />,
+                  accent: '#336791',
+                  bg: 'rgba(51,103,145,0.12)',
+                },
               ].map((skill) => (
                 <div
                   key={skill.name}
-                  className="bg-white dark:bg-gray-900 p-6 rounded-lg text-center border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600 hover:-translate-y-1 hover:shadow-md transition-all duration-300"
+                  className="group relative bg-white dark:bg-gray-900 pt-5 pb-4 px-4 rounded-2xl text-center border border-gray-200 dark:border-gray-800 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 overflow-hidden"
                 >
-                  <div className="flex justify-center">{skill.icon}</div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white">{skill.name}</h3>
+                  {/* Top accent bar — visible by default, fades out on hover */}
+                  <div
+                    className="absolute top-0 left-0 right-0 h-0.5 rounded-t-2xl group-hover:opacity-0 transition-opacity duration-300 pointer-events-none"
+                    style={{ background: skill.accent }}
+                  />
+                  {/* Full colored border — fades in on hover */}
+                  <div
+                    className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    style={{ border: `2px solid ${skill.accent}` }}
+                  />
+
+                  {/* Icon container with brand tint */}
+                  <div
+                    className="w-14 h-14 mx-auto mb-3 rounded-xl flex items-center justify-center"
+                    style={{ backgroundColor: skill.bg }}
+                  >
+                    {skill.icon}
+                  </div>
+
+                  <h3 className="font-semibold text-sm text-gray-900 dark:text-white">
+                    {skill.name}
+                  </h3>
                 </div>
               ))}
             </div>
