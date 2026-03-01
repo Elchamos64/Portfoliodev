@@ -79,17 +79,7 @@ export default function ActivityPage() {
             GitHub Activity
           </h1>
         </div>
-        <p className="text-gray-600 dark:text-gray-400 mb-8">
-          Public repositories and commits from the last 60 days for{' '}
-          <a
-            href="https://github.com/Elchamos64"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline hover:text-gray-900 dark:hover:text-white transition-colors"
-          >
-            Elchamos64
-          </a>
-        </p>
+
       </ScrollReveal>
 
       <ScrollReveal variant="fade-up" delay={0.1}>
@@ -108,11 +98,57 @@ export default function ActivityPage() {
           </button>
         </div>
       </ScrollReveal>
-
-      {loading && (
-        <p className="text-center text-gray-600 dark:text-gray-400">
-          Loading GitHub data...
+          <p className="text-gray-600 dark:text-gray-400 mb-8">
+          Public repositories and commits from the last 60 days for{' '}
+          <a
+            href="https://github.com/Elchamos64"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-gray-900 dark:hover:text-white transition-colors"
+          >
+            Elchamos64
+          </a>
         </p>
+      {loading && tab === 'repos' && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div
+              key={i}
+              className="h-full flex flex-col p-5 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-black animate-pulse"
+            >
+              <div className="flex items-start justify-between gap-2 mb-2">
+                <div className="h-4 bg-gray-200 dark:bg-gray-800 rounded w-2/3" />
+                <div className="h-4 w-4 bg-gray-200 dark:bg-gray-800 rounded shrink-0" />
+              </div>
+              <div className="h-3 bg-gray-200 dark:bg-gray-800 rounded w-full mb-2" />
+              <div className="h-3 bg-gray-200 dark:bg-gray-800 rounded w-4/5 mb-4" />
+              <div className="flex gap-3 mt-auto">
+                <div className="h-3 bg-gray-200 dark:bg-gray-800 rounded w-12" />
+                <div className="h-3 bg-gray-200 dark:bg-gray-800 rounded w-8" />
+                <div className="h-3 bg-gray-200 dark:bg-gray-800 rounded w-8" />
+                <div className="h-3 bg-gray-200 dark:bg-gray-800 rounded w-10 ml-auto" />
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {loading && tab === 'commits' && (
+        <div className="flex flex-col gap-3">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div
+              key={i}
+              className="flex items-start gap-3 p-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-black animate-pulse"
+            >
+              <div className="h-3 bg-gray-200 dark:bg-gray-800 rounded w-16 shrink-0 mt-0.5" />
+              <div className="flex-1 min-w-0">
+                <div className="h-3 bg-gray-200 dark:bg-gray-800 rounded w-full mb-2" />
+                <div className="h-3 bg-gray-200 dark:bg-gray-800 rounded w-1/3" />
+              </div>
+              <div className="h-3 bg-gray-200 dark:bg-gray-800 rounded w-10 shrink-0" />
+            </div>
+          ))}
+        </div>
       )}
 
       {error && (

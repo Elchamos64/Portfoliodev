@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
 interface ContributionDay {
   date: string;
@@ -57,6 +58,20 @@ export default function GitHubContributionGraph() {
     x: number;
     y: number;
   } | null>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
+
+  // Clamp tooltip horizontally so it never overflows the viewport
+  useEffect(() => {
+    if (!tooltip || !tooltipRef.current) return;
+    const el = tooltipRef.current;
+    const rect = el.getBoundingClientRect();
+    const padding = 8;
+    if (rect.left < padding) {
+      el.style.left = `${tooltip.x + (padding - rect.left)}px`;
+    } else if (rect.right > window.innerWidth - padding) {
+      el.style.left = `${tooltip.x - (rect.right - (window.innerWidth - padding))}px`;
+    }
+  }, [tooltip]);
 
   useEffect(() => {
     fetch('/api/github/contributions')
@@ -183,10 +198,11 @@ export default function GitHubContributionGraph() {
         </div>
       </div>
 
-      {/* Tooltip */}
-      {tooltip && (
+      {/* Tooltip — rendered in document.body via portal to escape stacking contexts */}
+      {tooltip && createPortal(
         <div
-          className="fixed z-50 px-2 py-1 text-xs bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded shadow-lg pointer-events-none whitespace-nowrap"
+          ref={tooltipRef}
+          className="fixed z-[9999] px-2 py-1 text-xs bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded shadow-lg pointer-events-none whitespace-nowrap"
           style={{
             left: tooltip.x,
             top: tooltip.y,
@@ -194,7 +210,8 @@ export default function GitHubContributionGraph() {
           }}
         >
           {tooltip.text}
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
