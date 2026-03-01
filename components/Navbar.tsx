@@ -28,14 +28,17 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white dark:bg-black border-b border-gray-200 dark:border-gray-800">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/70 dark:bg-black/70 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
+        <div className="flex items-center h-16">
+          {/* Left: Name */}
+          <div className="flex-1 flex items-center">
             <Link href="/" className="text-2xl font-bold text-gray-900 dark:text-white">
               Oscar Ramos
             </Link>
           </div>
+
+          {/* Center: Nav links */}
           <div className="flex items-center space-x-8">
             <Link
               href="/"
@@ -67,6 +70,10 @@ export default function Navbar() {
             >
               Contact
             </Link>
+          </div>
+
+          {/* Right: Theme toggle */}
+          <div className="flex-1 flex items-center justify-end">
             <button
               onClick={toggleDarkMode}
               className="p-2 rounded-lg border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 hover:scale-110 active:scale-95 transition-all duration-200"
