@@ -32,15 +32,15 @@ export default async function Home() {
         <Hero />
       </HeroAnimation>
 
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <ScrollReveal variant="fade-up">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-10">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8 sm:mb-10">
             Featured Projects
           </h2>
         </ScrollReveal>
         {featuredProjects.length > 0 ? (
           <ScrollReveal variant="fade-up" stagger={0.15}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
               {featuredProjects.map((project: any) => (
                 <ProjectCard key={project._id} project={project} />
               ))}
@@ -53,15 +53,15 @@ export default async function Home() {
         )}
       </section>
 
-      <section className="bg-gray-50 dark:bg-black py-16 border-t border-gray-200 dark:border-gray-800">
+      <section className="bg-gray-50 dark:bg-black py-12 sm:py-16 border-t border-gray-200 dark:border-gray-800">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal variant="fade-up">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-10">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8 sm:mb-10">
               Skills & Technologies
             </h2>
           </ScrollReveal>
           <ScrollReveal variant="fade-up" stagger={0.08}>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5">
               {[
                 {
                   name: 'Next.js',

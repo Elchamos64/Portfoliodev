@@ -74,8 +74,8 @@ export default function ActivityPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <ScrollReveal variant="fade-up">
         <div className="flex items-center gap-3 mb-2">
-          <FiGithub className="w-8 h-8 text-gray-900 dark:text-white" />
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
+          <FiGithub className="w-7 h-7 sm:w-8 sm:h-8 text-gray-900 dark:text-white" />
+          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
             GitHub Activity
           </h1>
         </div>
@@ -83,8 +83,10 @@ export default function ActivityPage() {
       </ScrollReveal>
 
       <ScrollReveal variant="fade-up" delay={0.1}>
-        <div className="mb-8 p-5 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-black">
-          <GitHubContributionGraph />
+        <div className="mb-8 p-3 sm:p-5 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-black overflow-x-auto">
+          <div className="min-w-[640px] sm:min-w-0">
+            <GitHubContributionGraph />
+          </div>
         </div>
       </ScrollReveal>
 

@@ -1,9 +1,8 @@
 'use client';
 
-import { useRef, useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import gsap from 'gsap';
 
 interface HobbyItem {
   src: string;
@@ -11,40 +10,19 @@ interface HobbyItem {
   caption?: string;
 }
 
+const TRANSITION_MS = 500;
+
 export default function HobbiesCarousel({ items }: { items: HobbyItem[] }) {
   const [current, setCurrent] = useState(0);
-  const imageRef = useRef<HTMLDivElement>(null);
-  const isAnimating = useRef(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const touchStartX = useRef<number | null>(null);
 
   const goTo = useCallback(
     (index: number) => {
-      if (isAnimating.current || index === current) return;
-      isAnimating.current = true;
-
-      const direction = index > current ? 1 : -1;
-
-      gsap.to(imageRef.current, {
-        opacity: 0,
-        x: -40 * direction,
-        duration: 0.25,
-        ease: 'power2.in',
-        onComplete: () => {
-          setCurrent(index);
-          gsap.set(imageRef.current, { x: 40 * direction });
-          gsap.to(imageRef.current, {
-            opacity: 1,
-            x: 0,
-            duration: 0.35,
-            ease: 'power2.out',
-            onComplete: () => {
-              isAnimating.current = false;
-            },
-          });
-        },
-      });
+      const next = ((index % items.length) + items.length) % items.length;
+      setCurrent(next);
     },
-    [current]
+    [items.length]
   );
 
   const next = useCallback(
@@ -53,40 +31,73 @@ export default function HobbiesCarousel({ items }: { items: HobbyItem[] }) {
   );
   const prev = () => goTo(current === 0 ? items.length - 1 : current - 1);
 
-  // Auto-advance every 3 seconds
   useEffect(() => {
-    timerRef.current = setInterval(next, 3000);
+    timerRef.current = setInterval(next, 4000);
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [next]);
 
-  // Reset timer on manual interaction
-  const handleManual = (action: () => void) => {
+  const resetTimer = () => {
     if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(next, 4000);
+  };
+
+  const handleManual = (action: () => void) => {
     action();
-    timerRef.current = setInterval(next, 3000);
+    resetTimer();
+  };
+
+  // Touch swipe support
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const diff = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(diff) > 40) {
+      handleManual(diff < 0 ? next : prev);
+    }
+    touchStartX.current = null;
   };
 
   return (
     <div className="flex flex-col items-center gap-4">
       {/* Main image */}
-      <div className="relative w-full max-w-lg aspect-[4/3] rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800">
-        <div ref={imageRef} className="absolute inset-0">
-          <Image
-            src={items[current].src}
-            alt={items[current].alt}
-            fill
-            className="object-cover"
-          />
-          {items[current].caption && (
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end">
-              <span className="text-white font-medium text-lg px-4 py-3">
-                {items[current].caption}
-              </span>
-            </div>
-          )}
-        </div>
+      <div
+        className="relative w-full max-w-lg aspect-[4/3] rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-100 dark:bg-gray-900 select-none"
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
+        {/* All slides stacked and preloaded; toggle opacity for a clean crossfade */}
+        {items.map((item, i) => (
+          <div
+            key={item.src}
+            className="absolute inset-0"
+            style={{
+              opacity: i === current ? 1 : 0,
+              transition: `opacity ${TRANSITION_MS}ms ease-in-out`,
+              pointerEvents: i === current ? 'auto' : 'none',
+            }}
+            aria-hidden={i !== current}
+          >
+            <Image
+              src={item.src}
+              alt={item.alt}
+              fill
+              sizes="(max-width: 640px) 100vw, 512px"
+              className="object-cover"
+              priority={i === 0}
+            />
+            {item.caption && (
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end">
+                <span className="text-white font-medium text-base sm:text-lg px-4 py-3">
+                  {item.caption}
+                </span>
+              </div>
+            )}
+          </div>
+        ))}
 
         {/* Arrows */}
         <button

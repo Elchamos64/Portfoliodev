@@ -6,11 +6,11 @@ import TypingName from '@/components/TypingName';
 export default function Hero() {
   return (
     <section className="bg-gray-50 dark:bg-black min-h-screen flex items-center">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
-        <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 w-full">
+        <div className="flex flex-col md:flex-row items-center gap-8 sm:gap-12 md:gap-16">
           {/* Profile Photo */}
           <div className="flex-shrink-0" data-hero-photo>
-            <div className="w-56 h-56 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-lg">
+            <div className="w-44 h-44 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-lg">
               <Image
                 src="/profile.jpeg"
                 alt="Oscar Ramos"
@@ -24,10 +24,10 @@ export default function Hero() {
 
           {/* Text Content */}
           <div className="text-center md:text-left">
-            <h1 data-hero-name className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-3">
+            <h1 data-hero-name className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-3">
               <TypingName text="Oscar Ramos" delay={400} speed={90} />
             </h1>
-            <p data-hero-title className="text-xl text-gray-500 dark:text-gray-400 mb-6">
+            <p data-hero-title className="text-lg sm:text-xl text-gray-500 dark:text-gray-400 mb-6">
               Software Engineer
             </p>
 
