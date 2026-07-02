@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { sileo } from 'sileo';
 
 const inputClass =
   'w-full bg-surface-2 border border-border px-3 py-2 font-mono text-sm text-foreground placeholder:text-muted focus:border-foreground focus:outline-none transition-colors';
@@ -11,30 +12,41 @@ export default function ContactForm() {
     email: '',
     message: ''
   });
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'loading'>('idle');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('loading');
 
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
+    const submit = fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    }).then((response) => {
       if (!response.ok) {
         throw new Error('Failed to submit form');
       }
+    });
 
-      setStatus('success');
+    try {
+      await sileo.promise(submit, {
+        loading: { title: 'sending…', description: 'posting to /api/contact' },
+        success: {
+          title: 'message sent',
+          description: "exit code 0 — I'll get back to you soon.",
+        },
+        error: {
+          title: 'send failed',
+          description: 'exit code 1 — please try again.',
+        },
+      });
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
-      setStatus('error');
       console.error('Error submitting form:', error);
+    } finally {
+      setStatus('idle');
     }
   };
 
@@ -83,17 +95,6 @@ export default function ContactForm() {
           className={`${inputClass} resize-y`}
         />
       </div>
-
-      {status === 'success' && (
-        <p className="mb-5 text-sm text-foreground">
-          ✓ message sent — exit code 0. I&apos;ll get back to you soon.
-        </p>
-      )}
-      {status === 'error' && (
-        <p className="mb-5 text-sm text-foreground">
-          ✗ error: message failed — exit code 1. please try again.
-        </p>
-      )}
 
       <button
         type="submit"

@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CommandPalette from "@/components/CommandPalette";
+import SileoToaster from "@/components/SileoToaster";
 
 const pixel = Press_Start_2P({
   weight: "400",
@@ -60,6 +61,7 @@ export default function RootLayout({
         <main className="flex-grow pt-16">{children}</main>
         <Footer />
         <CommandPalette />
+        <SileoToaster />
       </body>
     </html>
   );
