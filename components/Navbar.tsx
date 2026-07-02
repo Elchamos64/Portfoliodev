@@ -1,28 +1,34 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const NAV_LINKS = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/projects', label: 'Projects' },
-  { href: '/activity', label: 'Activity' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/', label: 'home' },
+  { href: '/about', label: 'about' },
+  { href: '/projects', label: 'projects' },
+  { href: '/activity', label: 'activity' },
+  { href: '/contact', label: 'contact' },
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [darkMode, setDarkMode] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  // The pre-paint script in the layout already set the class; sync state and
+  // track changes from anywhere (e.g. the command palette's theme toggle).
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-      setDarkMode(true);
-      document.documentElement.classList.add('dark');
-    }
+    const sync = () =>
+      setDarkMode(document.documentElement.classList.contains('dark'));
+    sync();
+    const observer = new MutationObserver(sync);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+    return () => observer.disconnect();
   }, []);
 
   // Lock body scroll while mobile menu is open
@@ -37,49 +43,61 @@ export default function Navbar() {
   }, [mobileOpen]);
 
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    if (!darkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
+    const next = !darkMode;
+    setDarkMode(next);
+    document.documentElement.classList.toggle('dark', next);
+    localStorage.setItem('theme', next ? 'dark' : 'light');
   };
 
+  const isActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname.startsWith(href);
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/70 dark:bg-black/70 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center h-16">
-          {/* Left: Name */}
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/85 backdrop-blur-md border-b border-border">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center h-16 font-mono">
+          {/* Left: name as a shell prompt */}
           <div className="flex-1 flex items-center min-w-0">
             <Link
               href="/"
-              className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white truncate"
+              className="text-sm sm:text-base font-bold text-foreground truncate hover:text-accent transition-colors"
               onClick={() => setMobileOpen(false)}
             >
-              Oscar Ramos
+              <span className="text-muted">~/</span>oscar-ramos
             </Link>
           </div>
 
-          {/* Center: Nav links (desktop only) */}
-          <div className="hidden md:flex items-center space-x-8">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 hover:-translate-y-0.5 transition-all duration-200"
-              >
-                {link.label}
-              </Link>
-            ))}
+          {/* Center: nav links (desktop) */}
+          <div className="hidden md:flex items-center gap-7 text-sm">
+            {NAV_LINKS.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`transition-colors ${
+                    active ? 'text-foreground' : 'text-muted hover:text-foreground'
+                  }`}
+                >
+                  <span className="text-accent">{active ? '> ' : ''}</span>
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
-          {/* Right: Theme toggle + mobile menu button */}
+          {/* Right: command palette + theme toggle + mobile menu button */}
           <div className="flex-1 flex items-center justify-end gap-2">
             <button
+              onClick={() => window.dispatchEvent(new Event('open-cmdk'))}
+              className="hidden md:inline-flex items-center px-2.5 py-2 border border-border text-xs text-muted hover:bg-surface-2 hover:text-foreground transition-colors"
+              aria-label="Open command palette"
+            >
+              ⌘K
+            </button>
+            <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-lg border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 hover:scale-110 active:scale-95 transition-all duration-200"
+              className="p-2 border border-border text-foreground hover:bg-surface-2 transition-colors"
               aria-label="Toggle dark mode"
             >
               {darkMode ? (
@@ -95,7 +113,7 @@ export default function Navbar() {
 
             <button
               onClick={() => setMobileOpen((v) => !v)}
-              className="md:hidden p-2 rounded-lg border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 active:scale-95 transition-all duration-200"
+              className="md:hidden p-2 border border-border text-foreground hover:bg-surface-2 transition-colors"
               aria-label="Toggle menu"
               aria-expanded={mobileOpen}
             >
@@ -115,21 +133,27 @@ export default function Navbar() {
 
       {/* Mobile menu drawer */}
       <div
-        className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out border-t border-gray-200 dark:border-gray-800 ${
+        className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out border-t border-border ${
           mobileOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="px-4 py-3 flex flex-col bg-white/95 dark:bg-black/95 backdrop-blur-md">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              className="py-3 px-2 text-base text-gray-900 dark:text-white border-b border-gray-100 dark:border-gray-900 last:border-b-0 hover:bg-gray-100 dark:hover:bg-gray-900 rounded-md transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
+        <div className="px-4 py-3 flex flex-col bg-background/95 backdrop-blur-md font-mono text-sm">
+          {NAV_LINKS.map((link) => {
+            const active = isActive(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className={`py-3 px-2 border-b border-border last:border-b-0 transition-colors ${
+                  active ? 'text-foreground' : 'text-muted hover:text-foreground'
+                }`}
+              >
+                <span className="text-accent">{active ? '> ' : '  '}</span>
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </nav>

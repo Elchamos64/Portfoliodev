@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 
+const inputClass =
+  'w-full bg-surface-2 border border-border px-3 py-2 font-mono text-sm text-foreground placeholder:text-muted focus:border-foreground focus:outline-none transition-colors';
+
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: '',
@@ -36,10 +39,14 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
-      <div className="mb-4">
-        <label htmlFor="name" className="block text-gray-900 dark:text-white font-semibold mb-2">
-          Name
+    <form onSubmit={handleSubmit} className="font-mono">
+      <p className="text-sm text-muted mb-6">
+        <span className="text-accent">$</span> ./send-message
+      </p>
+
+      <div className="mb-5">
+        <label htmlFor="name" className="block text-sm text-muted mb-1.5">
+          <span className="text-accent">$</span> name:
         </label>
         <input
           type="text"
@@ -47,12 +54,12 @@ export default function ContactForm() {
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           required
-          className="w-full px-4 py-2 border border-gray-200 dark:border-gray-800 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-gray-900 dark:focus:border-white bg-white dark:bg-black text-gray-900 dark:text-white"
+          className={inputClass}
         />
       </div>
-      <div className="mb-4">
-        <label htmlFor="email" className="block text-gray-900 dark:text-white font-semibold mb-2">
-          Email
+      <div className="mb-5">
+        <label htmlFor="email" className="block text-sm text-muted mb-1.5">
+          <span className="text-accent">$</span> email:
         </label>
         <input
           type="email"
@@ -60,12 +67,12 @@ export default function ContactForm() {
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           required
-          className="w-full px-4 py-2 border border-gray-200 dark:border-gray-800 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-gray-900 dark:focus:border-white bg-white dark:bg-black text-gray-900 dark:text-white"
+          className={inputClass}
         />
       </div>
-      <div className="mb-4">
-        <label htmlFor="message" className="block text-gray-900 dark:text-white font-semibold mb-2">
-          Message
+      <div className="mb-6">
+        <label htmlFor="message" className="block text-sm text-muted mb-1.5">
+          <span className="text-accent">$</span> message:
         </label>
         <textarea
           id="message"
@@ -73,25 +80,33 @@ export default function ContactForm() {
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
           required
           rows={5}
-          className="w-full px-4 py-2 border border-gray-200 dark:border-gray-800 rounded-lg focus:ring-2 focus:ring-gray-900 dark:focus:ring-white focus:border-gray-900 dark:focus:border-white bg-white dark:bg-black text-gray-900 dark:text-white"
+          className={`${inputClass} resize-y`}
         />
       </div>
+
       {status === 'success' && (
-        <div className="mb-4 p-4 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-lg border border-green-500">
-          Thank you for your message! I&apos;ll get back to you soon.
-        </div>
+        <p className="mb-5 text-sm text-foreground">
+          ✓ message sent — exit code 0. I&apos;ll get back to you soon.
+        </p>
       )}
       {status === 'error' && (
-        <div className="mb-4 p-4 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-lg border border-red-500">
-          Something went wrong. Please try again.
-        </div>
+        <p className="mb-5 text-sm text-foreground">
+          ✗ error: message failed — exit code 1. please try again.
+        </p>
       )}
+
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="w-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 py-3 rounded-lg font-semibold hover:bg-gray-700 dark:hover:bg-gray-200 hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none"
+        className="border border-border px-6 py-2.5 text-sm text-foreground hover:bg-foreground hover:text-background transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-foreground"
       >
-        {status === 'loading' ? 'Sending...' : 'Send Message'}
+        {status === 'loading' ? (
+          <>
+            sending<span className="caret ml-2" aria-hidden="true" />
+          </>
+        ) : (
+          '[ send ]'
+        )}
       </button>
     </form>
   );

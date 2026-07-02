@@ -1,53 +1,70 @@
 import ContactForm from '@/components/ContactForm';
+import TerminalWindow from '@/components/TerminalWindow';
 import ScrollReveal from '@/components/animations/ScrollReveal';
+
+const CHANNELS = [
+  {
+    label: 'email',
+    value: 'oscar.ramos.andres@gmail.com',
+    href: 'mailto:oscar.ramos.andres@gmail.com',
+    external: false,
+  },
+  {
+    label: 'github',
+    value: 'Elchamos64',
+    href: 'https://github.com/Elchamos64',
+    external: true,
+  },
+  {
+    label: 'linkedin',
+    value: 'Oscar Ramos',
+    href: 'https://www.linkedin.com/in/oscar-ramos-7aab1a237/',
+    external: true,
+  },
+];
 
 export default function Contact() {
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
       <ScrollReveal variant="fade-up">
-        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-          Get In Touch
-        </h1>
+        <div className="mb-8 sm:mb-10">
+          <p className="font-mono text-sm text-muted">
+            <span className="text-accent">$</span> cd ~/contact
+          </p>
+          <h1 className="font-pixel pixel-3d text-foreground text-lg sm:text-xl mt-3">
+            Get In Touch
+          </h1>
+          <p className="font-mono text-sm text-muted mt-4">
+            Have a question or want to work together? Feel free to reach out!
+          </p>
+        </div>
       </ScrollReveal>
 
       <ScrollReveal variant="fade-up" delay={0.1}>
-        <p className="text-center text-gray-600 dark:text-gray-400 mb-12 text-lg">
-          Have a question or want to work together? Feel free to reach out!
-        </p>
+        <TerminalWindow title="~/contact — zsh">
+          <div className="p-6 sm:p-10">
+            <ContactForm />
+          </div>
+        </TerminalWindow>
       </ScrollReveal>
 
-      <ScrollReveal variant="fade-up" delay={0.2}>
-        <ContactForm />
-      </ScrollReveal>
-
-      <ScrollReveal variant="fade-up" stagger={0.15}>
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-          <div className="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Email</h3>
-            <p className="text-gray-600 dark:text-gray-400">oscar.ramos.andres@gmail.com</p>
-          </div>
-          <div className="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">GitHub</h3>
+      <ScrollReveal variant="fade-up" delay={0.15}>
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
+          {CHANNELS.map(({ label, value, href, external }) => (
             <a
-              href="https://github.com/Elchamos64"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+              key={label}
+              href={href}
+              {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              className="group border border-border bg-surface px-4 py-3 font-mono text-sm transition-colors hover:border-foreground"
             >
-              Elchamos64
+              <span className="block text-muted">
+                <span className="text-accent">$</span> {label}:
+              </span>
+              <span className="block text-foreground mt-1 truncate group-hover:underline">
+                {value}
+              </span>
             </a>
-          </div>
-          <div className="bg-white dark:bg-gray-900 p-6 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-600 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">LinkedIn</h3>
-            <a
-              href="https://www.linkedin.com/in/oscar-ramos-7aab1a237/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
-            >
-              Oscar Ramos
-            </a>
-          </div>
+          ))}
         </div>
       </ScrollReveal>
     </div>

@@ -83,7 +83,7 @@ export default function ActivityPage() {
       </ScrollReveal>
 
       <ScrollReveal variant="fade-up" delay={0.1}>
-        <div className="mb-8 p-3 sm:p-5 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-black overflow-x-auto">
+        <div className="mb-8 p-3 sm:p-5 border border-border bg-surface overflow-x-auto">
           <div className="min-w-[640px] sm:min-w-0">
             <GitHubContributionGraph />
           </div>
@@ -111,51 +111,16 @@ export default function ActivityPage() {
             Elchamos64
           </a>
         </p>
-      {loading && tab === 'repos' && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div
-              key={i}
-              className="h-full flex flex-col p-5 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-black animate-pulse"
-            >
-              <div className="flex items-start justify-between gap-2 mb-2">
-                <div className="h-4 bg-gray-200 dark:bg-gray-800 rounded w-2/3" />
-                <div className="h-4 w-4 bg-gray-200 dark:bg-gray-800 rounded shrink-0" />
-              </div>
-              <div className="h-3 bg-gray-200 dark:bg-gray-800 rounded w-full mb-2" />
-              <div className="h-3 bg-gray-200 dark:bg-gray-800 rounded w-4/5 mb-4" />
-              <div className="flex gap-3 mt-auto">
-                <div className="h-3 bg-gray-200 dark:bg-gray-800 rounded w-12" />
-                <div className="h-3 bg-gray-200 dark:bg-gray-800 rounded w-8" />
-                <div className="h-3 bg-gray-200 dark:bg-gray-800 rounded w-8" />
-                <div className="h-3 bg-gray-200 dark:bg-gray-800 rounded w-10 ml-auto" />
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {loading && tab === 'commits' && (
-        <div className="flex flex-col gap-3">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <div
-              key={i}
-              className="flex items-start gap-3 p-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-black animate-pulse"
-            >
-              <div className="h-3 bg-gray-200 dark:bg-gray-800 rounded w-16 shrink-0 mt-0.5" />
-              <div className="flex-1 min-w-0">
-                <div className="h-3 bg-gray-200 dark:bg-gray-800 rounded w-full mb-2" />
-                <div className="h-3 bg-gray-200 dark:bg-gray-800 rounded w-1/3" />
-              </div>
-              <div className="h-3 bg-gray-200 dark:bg-gray-800 rounded w-10 shrink-0" />
-            </div>
-          ))}
-        </div>
+      {loading && (
+        <p className="font-mono text-sm text-muted py-8">
+          <span className="text-accent">$</span> gh fetch --repos --commits --last-60-days
+          <span className="caret ml-2" aria-hidden="true" />
+        </p>
       )}
 
       {error && (
-        <p className="text-center text-gray-600 dark:text-gray-400">
-          Failed to load GitHub data. Please try again later.
+        <p className="font-mono text-sm text-muted py-8">
+          ✗ error: failed to load github data — exit code 1. please try again later.
         </p>
       )}
 

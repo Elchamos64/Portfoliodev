@@ -18,19 +18,19 @@ interface ScrollRevealProps {
 }
 
 const variantConfig: Record<Variant, gsap.TweenVars> = {
-  'fade-up': { y: 40, opacity: 0 },
-  'fade-down': { y: -40, opacity: 0 },
-  'fade-left': { x: -40, opacity: 0 },
-  'fade-right': { x: 40, opacity: 0 },
+  'fade-up': { y: 20, opacity: 0 },
+  'fade-down': { y: -20, opacity: 0 },
+  'fade-left': { x: -20, opacity: 0 },
+  'fade-right': { x: 20, opacity: 0 },
   'fade-in': { opacity: 0 },
-  'scale-up': { scale: 0.85, opacity: 0 },
+  'scale-up': { scale: 0.95, opacity: 0 },
 };
 
 export default function ScrollReveal({
   children,
   variant = 'fade-up',
   delay = 0,
-  duration = 0.7,
+  duration = 0.5,
   stagger,
   className,
 }: ScrollRevealProps) {

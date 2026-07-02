@@ -18,11 +18,11 @@ interface ContributionCalendar {
 }
 
 function getColorClass(count: number): string {
-  if (count === 0) return 'bg-gray-100 dark:bg-gray-800';
-  if (count <= 3) return 'bg-green-200 dark:bg-green-900';
-  if (count <= 6) return 'bg-green-400 dark:bg-green-700';
-  if (count <= 9) return 'bg-green-600 dark:bg-green-500';
-  return 'bg-green-800 dark:bg-green-300';
+  if (count === 0) return 'contrib-0';
+  if (count <= 3) return 'contrib-1';
+  if (count <= 6) return 'contrib-2';
+  if (count <= 9) return 'contrib-3';
+  return 'contrib-4';
 }
 
 function getMonthLabels(
@@ -92,22 +92,21 @@ export default function GitHubContributionGraph() {
 
   if (loading) {
     return (
-      <div className="animate-pulse h-28 rounded-xl bg-gray-100 dark:bg-gray-900" />
+      <p className="font-mono text-sm text-muted py-10">
+        <span className="text-accent">$</span> gh contributions --last-year
+        <span className="caret ml-2" aria-hidden="true" />
+      </p>
     );
   }
 
   if (tokenRequired) {
     return (
-      <p className="text-sm text-center text-gray-500 dark:text-gray-400 py-2">
-        Add{' '}
-        <code className="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded">
-          GITHUB_TOKEN
-        </code>{' '}
-        to{' '}
-        <code className="font-mono bg-gray-100 dark:bg-gray-800 px-1 rounded">
-          .env.local
-        </code>{' '}
-        to enable the contribution graph.
+      <p className="font-mono text-sm text-center text-muted py-2">
+        {'// add '}
+        <code className="bg-surface-2 border border-border px-1">GITHUB_TOKEN</code>
+        {' to '}
+        <code className="bg-surface-2 border border-border px-1">.env.local</code>
+        {' to enable the contribution graph'}
       </p>
     );
   }
@@ -119,22 +118,20 @@ export default function GitHubContributionGraph() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
-        <span className="text-sm text-gray-600 dark:text-gray-400">
-          <span className="font-semibold text-gray-900 dark:text-white">
+      <div className="flex items-center justify-between mb-3 flex-wrap gap-2 font-mono">
+        <span className="text-sm text-muted">
+          <span className="text-accent">$</span>{' '}
+          <span className="font-bold text-foreground">
             {calendar.totalContributions.toLocaleString()}
           </span>{' '}
           contributions in the last year
         </span>
-        <div className="flex items-center gap-1 text-xs text-gray-400">
-          <span>Less</span>
+        <div className="flex items-center gap-1 text-xs text-muted">
+          <span>less</span>
           {[0, 2, 5, 8, 11].map((n) => (
-            <div
-              key={n}
-              className={`w-3 h-3 rounded-sm ${getColorClass(n)}`}
-            />
+            <div key={n} className={`w-3 h-3 ${getColorClass(n)}`} />
           ))}
-          <span>More</span>
+          <span>more</span>
         </div>
       </div>
 
@@ -146,7 +143,7 @@ export default function GitHubContributionGraph() {
               return (
                 <div key={i} className="flex-1 min-w-0 overflow-visible">
                   {label && (
-                    <span className="text-[10px] text-gray-400 whitespace-nowrap">
+                    <span className="font-mono text-[10px] text-muted whitespace-nowrap">
                       {label.label}
                     </span>
                   )}
@@ -161,7 +158,7 @@ export default function GitHubContributionGraph() {
               {DAY_LABELS.map((d, i) => (
                 <span
                   key={i}
-                  className="text-[10px] text-gray-400 text-right pr-1 leading-none"
+                  className="font-mono text-[10px] text-muted text-right pr-1 leading-none"
                 >
                   {d}
                 </span>
@@ -179,7 +176,7 @@ export default function GitHubContributionGraph() {
                   return (
                     <div
                       key={di}
-                      className={`w-full aspect-square rounded-sm cursor-default transition-opacity hover:opacity-75 ${getColorClass(day.contributionCount)}`}
+                      className={`w-full aspect-square cursor-default transition-opacity hover:opacity-75 ${getColorClass(day.contributionCount)}`}
                       onMouseEnter={(e) => {
                         const rect = e.currentTarget.getBoundingClientRect();
                         setTooltip({
@@ -202,7 +199,7 @@ export default function GitHubContributionGraph() {
       {tooltip && createPortal(
         <div
           ref={tooltipRef}
-          className="fixed z-[9999] px-2 py-1 text-xs bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded shadow-lg pointer-events-none whitespace-nowrap"
+          className="fixed z-[9999] px-2 py-1 font-mono text-xs bg-foreground text-background pointer-events-none whitespace-nowrap"
           style={{
             left: tooltip.x,
             top: tooltip.y,

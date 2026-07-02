@@ -6,12 +6,21 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: 'class',
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
         background: "var(--background)",
+        surface: "var(--surface)",
+        "surface-2": "var(--surface-2)",
         foreground: "var(--foreground)",
+        muted: "var(--muted)",
+        border: "var(--border)",
+        accent: "var(--accent)",
+      },
+      fontFamily: {
+        pixel: ["var(--font-pixel)", "monospace"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
     },
   },

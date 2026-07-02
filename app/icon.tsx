@@ -11,21 +11,20 @@ export default function Icon() {
     (
       <div
         style={{
-          fontSize: 18,
-          background: 'black',
+          fontSize: 16,
+          background: '#222733',
           width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          borderRadius: '6px',
-          color: '#ffffff',
+          color: '#e8e8ec',
           fontWeight: 'bold',
           fontFamily: 'monospace',
           letterSpacing: '-1px',
         }}
       >
-        &lt;/&gt;
+        &gt;_
       </div>
     ),
     {

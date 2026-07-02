@@ -1,12 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run build:*)",
-      "Bash(npm install:*)",
-      "Bash(pnpm add:*)",
-      "Bash(pnpm run build:*)",
-      "Bash(lsof:*)",
-      "Bash(kill:*)"
+      "Bash",
+      "Edit",
+      "Write",
+      "Read"
     ],
     "deny": [],
     "ask": []
